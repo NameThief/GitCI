@@ -28,6 +28,11 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm test
+    - run: |
+          LINES=$(jq '.total.lines.pct' coverage/coverage-summary.json)
+          STATEMENTS=$(jq '.total.statements.pct' coverage/coverage-summary.json)
+          FUNCTIONS=$(jq '.total.functions.pct' coverage/coverage-summary.json)
+          BRANCHES=$(jq '.total.branches.pct' coverage/coverage-summary.json)
 
     - name: Create or update coverage comment
     if: github.event_name == 'pull_request'
@@ -38,4 +43,12 @@ jobs:
     body: |
     ## Jest Coverage Report
     ${{ env.coverage }}
+
+   - name: Find Comment
+    uses: peter-evans/find-comment@v3
+    id: fc
+    with:
+      issue-number: ${{ github.event.pull_request.number }}
+      comment-author: "github-actions[bot]"
+      body-includes: Jest Coverage Report
 edit-mode: replace
