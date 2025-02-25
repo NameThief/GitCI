@@ -6,6 +6,14 @@
   "scripts": {
     "test": "jest"
   },
+  "jest": {
+    "collectCoverage": true,
+    "coverageReporter": [
+      "html",
+      "json-summary",
+      "text-summary"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
