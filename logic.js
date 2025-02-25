@@ -87,3 +87,12 @@ function completeTodo(state, id) {
     }),
   };
 }
+
+module.exports = {
+  addTodo,
+  addTodoAction,
+  deleteTodo,
+  deleteTodoAction,
+  completeTodo,
+  completeTodoAction
+}
