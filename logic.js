@@ -3,7 +3,7 @@
 
 // Here is a simple implementation of ngrx (to create a an app in the style of redux).
 class Store {
-  constructor(reducer, initialState = { todos: [] }) {
+  constructor(reducer, initialState = { last_id: 0, todos: [] }) {
     this.state = initialState;
     this.reducer = reducer;
     this.listeners = [];
@@ -62,9 +62,10 @@ function reducer(state = { todos: [] }, action) {
 function addTodo(state, name) {
   return {
     ...state,
+    last_id : state.last_id + 1,
     todos: [
       ...state.todos,
-      { id: crypto.randomUUID(), name, completed: false },
+      { id: state.last_id, name, completed: false },
     ],
   };
 }
